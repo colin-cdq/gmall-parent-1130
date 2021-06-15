@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            background-color: red;
+            width:100px;
+            height: 100px;
+        }
+        .green{
+            background-color: green;
+            width:100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+hello!
+<br/>
+取值
+<input value="111"  th:value="${my}">
+<br/>
+判断
+<div class="red" th:class="(${1==0})?'red':'green'"></div>
+<input value="22222" th:value="${my}" th:if="${1==0}"/>
+<br/>
+循环:<input value="22222" th:each="str:${list}" th:value="${str}"/>
+<br/>
+
+<br />
+
+页面嵌入
+<div th:include="testInner::bottom"></div>
+
+<br />
+
+
+与页面的js代码互动
+<a th:href="'javascript:a(\''+${num}+'\');'">点我</a>
+<br />
+
+<script language="JavaScript">
+    function a(num) {
+        alert(num);
+    }
+</script>
+</body>
+</html>

@@ -11,5 +11,12 @@
 
     <artifactId>web</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.cdq</groupId>
+            <artifactId>web-util</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

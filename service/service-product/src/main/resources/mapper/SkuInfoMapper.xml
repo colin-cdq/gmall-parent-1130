@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdq.product.mapper.SkuInfoMapper">
+
+    <select id="getGoodsBySkuId"  resultMap="getGoodsBySkuIdMap">
+         SELECT
+            si.id,
+            si.sku_name AS title,
+            si.price,
+            si.sku_default_img AS default_img,
+            bt.id AS tm_id,
+            bt.tm_name,
+            bt.logo_url AS tm_logo_url,
+          c3.id as category3_id,
+          c3.`name` as category3_name,
+          0 as hot_score,
+          bi.id as attr_id,
+          bi.attr_name,
+          bv.value_name as attr_value
+        FROM
+            sku_info si,
+            sku_attr_value sav,
+            base_attr_info bi,
+            base_attr_value bv,
+            base_trademark bt,
+          base_category3 c3
+        WHERE
+            sav.attr_id = bi.id
+            and sav.var_id = bv.id
+            and sav.sku_id = si.id
+            and si.category3_id = c3.id
+            and si.tm_id=bt.id
+            and c3.id = si.category_id
+            AND si.id = #{skuId}
+    </select>
+
+    <resultMap id="getGoodsBySkuIdMap" type="com.cdq.model.list.Goods" autoMapping="true">
+        <id column="id" property="id"></id>
+        <collection property="attrs" ofType="com.cdq.model.list.SearchAttr" autoMapping="true">
+            <result column="attr_id" property="attrId"></result>
+        </collection>
+    </resultMap>
+
+</mapper>
